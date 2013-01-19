@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+
+    <title>AJAX Talk</title>
+
+    <meta name="description" content="A framework for easily creating beautiful presentations using HTML">
+    <meta name="author" content="Hakim El Hattab">
+
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+    <link rel="stylesheet" href="css/reveal.min.css">
+    <link rel="stylesheet" href="css/theme/night.css" id="theme">
+
+    <!-- For syntax highlighting -->
+    <link rel="stylesheet" href="lib/css/zenburn.css">
+
+    <!-- If the query includes 'print-pdf', use the PDF print sheet -->
+    <script>
+      document.write( '<link rel="stylesheet" href="css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
+    </script>
+
+    <!--[if lt IE 9]>
+    <script src="lib/js/html5shiv.js"></script>
+    <![endif]-->
+
+    <style>
+      .inline-third {
+        display:inline-block;
+        width:30%;
+      }
+      .absolute-middle-third {
+        position:absolute;
+        top:50%;
+        width:100%;
+        text-align:center;
+      }
+      .reveal .slide-title {
+        margin-bottom:1em;
+      }
+      .reveal pre code {
+        font-size:1.3em;
+        line-height:1.5em;
+      }
+    </style>
+    <style>
+
+    </style>
+  </head>
+
+  <body>
+
+    <div class="reveal">
+
+      <!-- Any section element inside of this container is displayed as a slide -->
+      <div class="slides">
+        <section>
+          <h1>Dynamic Web Experiences</h1>
+          <br />
+          <h2>Using Drupal's AJAX API</h2>
+          <br />
+          <h3>==Mike Kadin==</h3>
+          <h4>Twitter - @mkadin</h3>
+            <h4>http://mikekadin.com</h3>
+              <h4>http://moduleoff.com</h3>
+                </section>
+                <section>
+                  <h2 class="slide-title">Agenda</h2>
+                  <br />
+                  <ol>
+                    <li class="fragment"><h3>What is AJAX?</h3></li>
+                    <li class="fragment"><h3>How does Drupal's AJAX system work?</h3></li>
+                    <li class="fragment"><h3>DEMO: AJAX-ified links</h3></li>
+                    <li class="fragment"><h3>DEMO: AJAX-ified forms</h3></li>
+                  </ol>
+                </section>
+                <section>
+                  <h2 class="slide-title">What is AJAX?</h2>
+                  <h3 class="fragment">(Asynchronous JavaScript and XML)</h3>
+                  <div class ="image-conatiner">
+                    <div class="inline-third">
+                      <img class="fragment" src="images/server.png" height="235" id="server-image" />
+                    </div>
+                    <div class="inline-third">
+                      <div class="arrow-left fragment">HTML, CSS, JS<br />=====></div>
+                    </div>
+                    <div class="inline-third">
+                      <img class="fragment" src="images/webpage.png" width="400" id="webpage-image" />
+                    </div>
+                    <div class="absolute-middle-third">
+                      <div class="arrow-right fragment">XmlHttpRequest<br /><=====</div>
+                    </div>
+                    <div class="absolute-middle-third">
+                      <br />
+                      <br />
+                      <div class="arrow-right fragment">Data<br />=====></div>
+                    </div>
+                  </div>
+                </section>
+                <section>
+                  <h2 class="slide-title">What Does it Take to Use AJAX?</h2>
+                  <br />
+                  <ol>
+                    <li class="fragment"><h3>Client-side JavaScript to make requests to the server</h3></li>
+                    <li class="fragment"><h3>Server-side code to handle the requests and send back data</h3></li>
+                    <li class="fragment"><h3>Client-side JavaScript to do something with the data that gets sent back</h3></li>
+                  </ol>
+                  <br />
+                  <ul>
+                    <li class="fragment"><h4>This is what makes AJAX Hard!</h4></li>
+                    <li class="fragment"><h4>A lot of moving pieces.</h4></li>
+                    <li class="fragment"><h4>Code on both the server- and client-side</h4></li>
+                  </ul>
+                </section>
+                <section>
+                  <h2 class="slide-title">Drupal's AJAX API</h2>
+                  <br />
+                  <ul>
+                    <li class="fragment"><h3>Takes the pain out of AJAX</h3></li>
+                    <li class="fragment"><h3>You can work entirely within PHP</h3></li>
+                    <li class="fragment"><h3>Extensible and generalizable</h3></li>
+                  </ul>
+                </section>
+                <section>
+                  <h2 class="slide-title">What Do I Need in Drupal to Use AJAX</h2>
+                  <br />
+                  <ul>
+                    <li class="fragment"><h3>Drupal's ajax.js has to be loaded on the page</h3></li>
+                    <li class="fragment"><h3>Server-side PHP callback to handle AJAX requests</h3></li>
+                    <li class="fragment"><h3>An AJAX-ified link or form element.</h3></li>
+                  </ul>
+                </section>
+                <section>
+                  <h2 class="slide-title">Real Example: Node Loading with Views</h2>
+                  <h3>Here's What I've Done So Far</h3>
+                  <ul>
+                    <li class="fragment">Created a bunch of fake article nodes</li>
+                    <li class="fragment">Created a view with article node titles as a block</li>
+                    <li class="fragment">Created a basic page with some simple HTML in it<br />
+<pre><code>&lt;div id="ajax-content-wrapper"&gt;
+  &lt;p&gt;Click on a node title to load it!&lt;/p&gt;
+&lt;/div&gt;</code></pre>
+                    </li>
+                    <li class="fragment"><a href="http://drupal7/node/51" target="_blank">Check It Out</a></li>
+                  </ul>
+                </section>
+ <section>
+                  <h2 class="slide-title">Real Example: Form API AJAX</h2>
+                  <h3>Here's What I've Done So Far</h3>
+                  <ul>
+                    <li class="fragment">Created a very simple custom form at /example-form.</li>
+                    <li class="fragment"><a href="http://drupal7/example-form" target="_blank">Check It Out</a></li>
+                  </ul>
+                </section>
+                </div>
+
+                </div>
+
+                <script src="lib/js/head.min.js"></script>
+                <script src="js/reveal.min.js"></script>
+
+                <script>
+
+                  // Full list of configuration options available here:
+                  // https://github.com/hakimel/reveal.js#configuration
+                  Reveal.initialize({
+                    controls: true,
+                    progress: true,
+                    history: true,
+                    center: true,
+
+                    theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+                    transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/none
+
+                    // Optional libraries used to extend on reveal.js
+                    dependencies: [
+                      { src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+                      { src: 'plugin/markdown/showdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+                      { src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+                      { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+                      { src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+                      { src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+                      // { src: 'plugin/remotes/remotes.js', async: true, condition: function() { return !!document.body.classList; } }
+                    ]
+                  });
+
+                </script>
+
+                </body>
+                </html>
